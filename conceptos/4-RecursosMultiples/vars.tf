@@ -12,3 +12,31 @@ variable "contenedores_a_crear" {
         contenedorB = 9097
     }
 }
+
+# Quiero poder poner nombres arbitrarios, 
+# pero quiero poder indicar para cada contenedor:
+# Puerto inter y el puerto externo
+
+variable "contenedores_a_crear_mas_personalizados" {
+    type        = map(map(number))
+    description = "Numero de contenedores a generar"
+    default     =  {
+        contenedor_personalizado_1 = {
+            interno = 80
+            externo = 8091
+        }
+        contenedor_personalizado_B = {
+            interno = 80
+            externo = 9091
+        }
+    }
+}
+
+variable "comandos" {
+    type        = map(list(string))
+    description = "Comandos de los contenedores a generar"
+    default     =  {
+        contenedor_personalizado_1 =  ["sh" ,"-c",  "sleep 3600"]
+        contenedor_personalizado_B =  ["sh" ,"-c",  "sleep 7200"]
+    }
+}

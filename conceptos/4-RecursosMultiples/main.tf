@@ -39,6 +39,19 @@ resource "docker_container" "mi_contenedor2" {
         external = each.value
     }
 }
+resource "docker_container" "mi_contenedor_mas_personalizado" {
+    for_each = var.contenedores_a_crear_mas_personalizados
+    
+    name  = each.key
+    image = docker_image.mi_imagen.latest
+    
+    command = var.comandos[each.key]
+    
+    ports {
+        internal = each.value["interno"]
+        external = each.value.externo
+    }
+}
 
 resource "docker_image" "mi_imagen" {
     name = "httpd:alpine3.16"
