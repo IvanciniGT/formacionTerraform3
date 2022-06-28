@@ -44,3 +44,29 @@ Jenkins
     ansible-playbook -i GENERADO_ADHOC PLAYBOOK
     El contenedor de ansible a la basura
 
+
+
+# Providers
+
+Una libreria para poder gestionar servicios que ofrezca un PROVEEDOR DE SERVICIOS
+
+# Provisioner
+
+Una libreria que nos permite ejecutar comandos/realizar acciones contra un recurso/servicio
+
+Hay 3 provisioners en Terraform:
+    local-exec      Ejecutar un comando localmente
+    remote-exec     Ejecutar un comando en el recurso remoto
+    file            Copiar ficheros del local al remoto
+    ---
+    chef                |
+    puppet              |   No me importa no tener ansible
+    habitat             |   Aunque lo tuviera no lo usaria
+    salt-masterless     |   JAMAS EN LA VIDA
+    ANSIBLE NO          |   NUNCA, Ni los de puppet & company los uso
+    
+* local, localmente: donde estamos ejecutando terraform
+
+Estoy montando una solución FUERTEMENTE ACOPLADA !!!
+
+Orquestador: JENKINS & company

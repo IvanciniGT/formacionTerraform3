@@ -53,6 +53,18 @@ resource "docker_container" "mi_contenedor_mas_personalizado" {
     }
 }
 
+resource "docker_container" "mi_contenedor_lista" {
+    count = length( var.contenedores_como_lista )
+    
+    name  = var.contenedores_como_lista[count.index].nombre
+    image = docker_image.mi_imagen.latest
+    
+    ports{
+        internal = var.contenedores_como_lista[count.index].interno
+        external = var.contenedores_como_lista[count.index].externo
+    }
+}
+
 resource "docker_image" "mi_imagen" {
     name = "httpd:alpine3.16"
 }

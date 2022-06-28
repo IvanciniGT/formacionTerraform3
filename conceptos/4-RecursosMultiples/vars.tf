@@ -40,3 +40,20 @@ variable "comandos" {
         contenedor_personalizado_B =  ["sh" ,"-c",  "sleep 7200"]
     }
 }
+
+variable "contenedores_como_lista" {
+    type        = list( map(string)  )
+    description = "Contenedores a generar"
+    default     =  [
+        {
+            nombre = "contenedor_lista_1"
+            interno = 80
+            externo = 8092
+        },
+        {
+            nombre = "contenedor_lista2_B"
+            interno = 80
+            externo = 9092
+        }
+    ]
+}
