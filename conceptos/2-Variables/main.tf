@@ -15,11 +15,23 @@ resource "docker_container" "mi_contenedor" {
     image = docker_image.mi_imagen.latest 
     env = var.variables_contenedor
     
-    ports {
-        internal = 80
-        external = 83
-        ip       = "172.31.10.35"
-        protocol = "tcp"
+    #ports {
+    #    internal = 80
+    #    external = 83
+    #    ip       = "127.0.0.1"
+    #    protocol = "tcp"
+    #}
+    dynamic "ports" {
+        for_each = var.puertos_expuestos # Aqui una lista
+        iterator = puerto
+        content {
+            internal = tonumber(puerto.value["interno"])
+            # La conversión de tipo de datos se hace 
+            # automaticamente  por terraform si quiero
+            external = puerto.value["externo"]
+            protocol = puerto.value["protocolo"]
+            ip       = puerto.value["ip"]
+        }
     }
 }
     

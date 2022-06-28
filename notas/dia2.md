@@ -30,3 +30,17 @@ Las variables tienen su tipo:
 - string                "valor"
 - set(string)           [ "valor1", "valor2" ]          Se entiende que el orden de los datos no es relevante
 - list(string)          [ "valor1", "valor2" ]
+
+
+Jenkins
+    Montar un contenedor de docker -> desde una imagen que contenga terraform
+    Dentro del contenedor clono el repo de mi despliegue de terraform
+    Terraform init
+    Terraform apply 
+    Terraform output > fichero de inventario
+    Tiro ese contenedor terraform a la basura
+    monto un contenedor con ansible
+    Le clono el repo del playbook que este usando
+    ansible-playbook -i GENERADO_ADHOC PLAYBOOK
+    El contenedor de ansible a la basura
+

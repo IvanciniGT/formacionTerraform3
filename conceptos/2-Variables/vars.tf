@@ -1,3 +1,8 @@
+variable "puertos_expuestos" {
+    type        = list(map(string))
+    description = "Puertos a exponer en el host para el contenedor"
+}
+
 variable "variables_contenedor" {
     type        = set(string)  # Esta variable alberga un texto
     description = "Variables de entorno del contenedor"
