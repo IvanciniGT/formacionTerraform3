@@ -29,3 +29,9 @@ Generar outputs
     
     
     
+ var X = dalse
+ 
+ VARIABLE
+ true        == true => true
+ false       == true => false
+ 

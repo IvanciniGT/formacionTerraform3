@@ -15,7 +15,11 @@ data "docker_registry_image" "imagen_en_registry" {
 
 resource "docker_image" "mi_imagen" {
     name          = "${var.image.repo}:${var.image.tag}"
-    pull_triggers = [ data.docker_registry_image.imagen_en_registry.sha256_digest ]
+    pull_triggers = (
+                        var.force_image_refresh
+                        ? [ data.docker_registry_image.imagen_en_registry.sha256_digest ]
+                        : null
+                    )
            # nginx:latest
 }
 

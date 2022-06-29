@@ -40,4 +40,5 @@ resources = {
     cpu_shares = null
     memory = 2000
 } 
-        
+
+force_image_refresh = true

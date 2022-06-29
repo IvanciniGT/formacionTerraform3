@@ -183,4 +183,8 @@ variable "resources" {
 # Asegurarse que si hay cambio REAL en la imagen 
 # (en el registry) que se actualice
 
-# DATA 
+variable "force_image_refresh" {
+    type        = bool
+    description = "Fuerza descarga de imagen si cambia en el registry"
+    nullable = false
+}
