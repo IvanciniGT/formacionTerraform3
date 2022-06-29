@@ -1,7 +1,7 @@
 container_name = "minginx"
 
 image = {
-    repo = "nginx"
+    repo = null
     tag  = "latest"
 }
 

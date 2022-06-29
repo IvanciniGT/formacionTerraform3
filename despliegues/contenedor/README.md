@@ -1,10 +1,10 @@
 Queremos crear un script que permita trabajar con contenedores
 Queremos tener unas variables de configuración del contenedor
     Imagen
-        Repo (programa)
-        Tag  (version)
-        Name
-        Ports
+        Repo (programa)         √
+        Tag  (version)          √
+        Name                    √
+        Ports                   √
             Interno
             Externo
             Protocolo
@@ -12,7 +12,7 @@ Queremos tener unas variables de configuración del contenedor
         Volumenes locales (carpetas "compartidas" entre el host y el contenedor )
             ruta host
             ruta contenedor
-        Environment
+        Environment             √
         Limitaciones HW
             CPU
             Memoria
