@@ -2,7 +2,7 @@ container_name = "minginx"
 
 image = {
     repo = "nginx"
-    tag  = "latest"
+    tag  = "latest" 
 }
 
 ports = [

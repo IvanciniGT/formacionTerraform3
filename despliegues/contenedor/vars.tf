@@ -179,3 +179,8 @@ variable "resources" {
     }
     nullable = true
 }
+
+# Asegurarse que si hay cambio REAL en la imagen 
+# (en el registry) que se actualice
+
+# DATA 

@@ -9,8 +9,14 @@ terraform {
 provider "docker" {
 }
 
-resource "docker_image" "mi_imagen" {
+data "docker_registry_image" "imagen_en_registry" {
     name = "${var.image.repo}:${var.image.tag}"
+}
+
+resource "docker_image" "mi_imagen" {
+    name          = "${var.image.repo}:${var.image.tag}"
+    pull_triggers = [ data.docker_registry_image.imagen_en_registry.sha256_digest ]
+           # nginx:latest
 }
 
 resource "docker_container" "mi_contenedor" {
@@ -50,5 +56,6 @@ resource "docker_container" "mi_contenedor" {
     memory  = var.resources == null ? null : var.resources.memory
             # CONDICION ? ValoreSiSeCumple: ValorSiNoSecumple       # Operador ternario
             # Python        ValoreSiSeCumple if CONDICION else ValorSiNoSecumple
-
+    
+    memory_swap = -1
 }
