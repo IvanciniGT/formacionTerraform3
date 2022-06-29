@@ -4,3 +4,4 @@ image = {
     }
     
 contenedor = "minginx"
+external_port = 8080

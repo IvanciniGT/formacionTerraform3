@@ -15,5 +15,14 @@ module "nginx" {
     
     container_name = var.contenedor
     image = var.image
+    
+    ports = [
+        {
+            internal = 80
+            external = var.external_port
+            protocol = "tcp"
+            ip       = "0.0.0.0"
+        }
+    ]
         
 }

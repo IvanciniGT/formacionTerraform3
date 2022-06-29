@@ -11,3 +11,7 @@ variable "image" {
     description = "Imagen de contenedor a descargar. Debe contener las claves 'repo' y 'tag'"
 }
 
+variable "external_port" {
+    type        = number
+    description = "Puerto publico del nginx"
+}
