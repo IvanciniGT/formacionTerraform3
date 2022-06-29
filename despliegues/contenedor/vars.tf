@@ -64,7 +64,7 @@ variable "ports" {
 #[true, true]
 
 variable "environment" {
-    type        = set(string)  # Esta variable alberga un texto
+    type        = map(string)  # Esta variable alberga un texto
     description = "Variables de entorno del contenedor"
     nullable    = true
 }

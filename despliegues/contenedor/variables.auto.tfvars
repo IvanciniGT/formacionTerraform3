@@ -20,7 +20,10 @@ ports = [
         }
     ]
     
-environment = null
+environment = {
+    CLAVE1 = "valor1"
+    CLAVE2 = "valor2"
+}
 
 volumes = [{
         host_path = "/tmp/otRa12Cosa.cosa"
