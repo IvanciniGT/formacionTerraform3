@@ -31,7 +31,14 @@ resource "docker_container" "mi_contenedor" {
             ip       = puerto.value["ip"]
         }
     }
-    
+    dynamic "volumes" {
+        for_each = var.volumes
+        iterator = volumen
+        content {
+            host_path      = volumen.value["host_path"]
+            container_path = volumen.value["container_path"]
+        }
+    }
     # cpu_shares  = null                        # Si var.resources es nulo
     # cpu_shares  = var.resources.cpu_shares    # Si var.resources no es nulo
     cpu_shares  = (
