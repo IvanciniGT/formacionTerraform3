@@ -8,9 +8,40 @@ terraform {
 
 provider "docker" {
 }
-# PASO 1 Crear clave ssh
-# Paso 2 Crear una maquina en AWS donde ejecutar este conteendor
-# PAso 3 Descargar imagen
+
 resource "docker_image" "mi_imagen" {
     name = "${var.image.repo}:${var.image.tag}"
+}
+
+resource "docker_container" "mi_contenedor" {
+    
+    name  = var.container_name
+    image = docker_image.mi_imagen.latest 
+    
+        # Set of String     environment => map(strings)
+    env = [ for clave, valor in var.environment: "${clave}=${valor}" ]
+    
+    dynamic "ports" {
+        for_each = var.ports
+        iterator = puerto
+        content {
+            internal = puerto.value["internal"]
+            external = puerto.value["external"]
+            protocol = puerto.value["protocol"]
+            ip       = puerto.value["ip"]
+        }
+    }
+    
+    # cpu_shares  = null                        # Si var.resources es nulo
+    # cpu_shares  = var.resources.cpu_shares    # Si var.resources no es nulo
+    cpu_shares  = (
+                    var.resources == null # Si es nulo: recursos
+                        ? null            # Devuelvo null. Es como si no hubiera definido cpu_shares
+                        : var.resources.cpu_shares
+                    )
+    
+    memory  = var.resources == null ? null : var.resources.memory
+            # CONDICION ? ValoreSiSeCumple: ValorSiNoSecumple       # Operador ternario
+            # Python        ValoreSiSeCumple if CONDICION else ValorSiNoSecumple
+
 }

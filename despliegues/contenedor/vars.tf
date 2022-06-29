@@ -157,11 +157,24 @@ variable "resources" {
     description = "Limitacion de recursos Hardware para el conteendor"
     
     validation {
-        condition = var.resources.memory > 0
+                    # Si resources es nulo delvuelve que es valido
+                    # si resources no es nulo 
+                        #devuelve si la memoria es mayor que 0
+        condition = ( var.resources==null 
+                        ? true
+                        : var.resources.memory == null 
+                            ? true
+                            : var.resources.memory > 0
+                    )
         error_message = "El valor de memoria del contenedor debe ser positivo"
     }
     validation {
-        condition = var.resources.cpu_shares > 0
+        condition = ( var.resources==null 
+                        ? true
+                        : var.resources.cpu_shares == null 
+                            ? true
+                            : var.resources.cpu_shares > 0
+                    )
         error_message = "El valor de cpu_shares del contenedor debe ser positivo"
     }
     nullable = true

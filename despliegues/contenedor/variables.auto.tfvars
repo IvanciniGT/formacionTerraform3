@@ -30,5 +30,8 @@ volumes = [{
         container_path = "/root/"
     }]
     
-resources = null
+resources = {
+    cpu_shares = null
+    memory = 2000
+} 
         

@@ -13,7 +13,7 @@ Queremos tener unas variables de configuración del contenedor
             ruta host
             ruta contenedor
         Environment             √
-        Limitaciones HW
+        Limitaciones HW         √
             CPU
             Memoria
 Generar outputs
@@ -26,3 +26,10 @@ Generar outputs
     &&  y cortocircuito
     |   o
     ||  o cortocircuito
+    
+    
+    
+    {
+    memory = null
+    cpu_shares = 2048
+}
