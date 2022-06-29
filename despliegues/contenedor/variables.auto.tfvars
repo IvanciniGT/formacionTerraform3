@@ -1,7 +1,7 @@
 container_name = "minginx"
 
 image = {
-    repo = null
+    repo = "nginx"
     tag  = "latest"
 }
 
@@ -21,3 +21,11 @@ ports = [
     ]
     
 environment = null
+
+volumes = [{
+        host_path = "/tmp/otRa12Cosa.cosa"
+        container_path = "/root/"
+    }]
+    
+resources = null
+        

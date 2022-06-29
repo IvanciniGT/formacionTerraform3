@@ -39,6 +39,7 @@ variable "ports" {
                                 )
         error_message = "La IP no tiene un formato válido"
     }
+    nullable = true
 }
 #variable "ports" {
 #    type        = list(map(string))
@@ -74,6 +75,11 @@ variable "image" {
         tag  = string
     })
     description = "Imagen de contenedor a descargar. Debe contener las claves 'repo' y 'tag'"
+    
+    validation {
+        condition = var.image.repo != null && var.image.tag != null
+        error_message = "Debe suministrar un valor no nulo para el repo y el tag de la imagen"
+    }
 }
 
 #variable "image" {
@@ -112,3 +118,51 @@ variable "image" {
 
 
 
+
+variable "volumes" {
+    type        = list(object({
+        host_path       = string 
+        container_path  = string
+    }))
+    description = "Volumenes locales a montar en el contenedor"
+    validation  {
+        condition = alltrue([ for volumen in var.volumes: 
+            length(regexall("^[/]?([A-Za-z0-9_.-]+[/]?)*$"
+                        , volumen.host_path != null ? 
+                            volumen.host_path : 
+                            "RUTA INVALIDA" ))
+                    ==1 ]
+                                )
+        error_message = "La ruta del host para el volumen no es válida"
+    }
+    validation  {
+        condition = alltrue([ for volumen in var.volumes: 
+            length(regexall("^[/]?([A-Za-z0-9_.-]+[/]?)*$"
+                        , volumen.container_path != null ? 
+                            volumen.container_path : 
+                            "RUTA INVALIDA" ))
+                    ==1 ]
+                                )
+        error_message = "La ruta del contenedor para el volumen no es válida"
+    }
+    nullable = true
+}
+
+
+variable "resources" {
+    type        = object({
+        memory       = number # Es nullable y requerido sin opción a cambiarlo
+        cpu_shares   = number
+    })
+    description = "Limitacion de recursos Hardware para el conteendor"
+    
+    validation {
+        condition = var.resources.memory > 0
+        error_message = "El valor de memoria del contenedor debe ser positivo"
+    }
+    validation {
+        condition = var.resources.cpu_shares > 0
+        error_message = "El valor de cpu_shares del contenedor debe ser positivo"
+    }
+    nullable = true
+}
