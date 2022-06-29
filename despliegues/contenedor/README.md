@@ -29,7 +29,3 @@ Generar outputs
     
     
     
-    {
-    memory = null
-    cpu_shares = 2048
-}

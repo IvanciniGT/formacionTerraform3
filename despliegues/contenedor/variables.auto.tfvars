@@ -25,10 +25,16 @@ environment = {
     CLAVE2 = "valor2"
 }
 
-volumes = [{
-        host_path = "/tmp/otRa12Cosa.cosa"
-        container_path = "/root/"
-    }]
+volumes = [
+    {
+        host_path = "/tmp/volumen1"
+        container_path = "/tmp/volumen1"
+    },
+    {
+        host_path = "/tmp/volumen2"
+        container_path = "/tmp/volumen2"
+    }
+]
     
 resources = {
     cpu_shares = null

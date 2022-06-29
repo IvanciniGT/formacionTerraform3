@@ -19,10 +19,10 @@ resource "docker_container" "mi_contenedor" {
     image = docker_image.mi_imagen.latest 
     
         # Set of String     environment => map(strings)
-    env = [ for clave, valor in var.environment: "${clave}=${valor}" ]
+    env = var.environment == null ? null : [ for clave, valor in var.environment: "${clave}=${valor}" ]
     
     dynamic "ports" {
-        for_each = var.ports
+        for_each = var.ports == null ? [] : var.ports
         iterator = puerto
         content {
             internal = puerto.value["internal"]
@@ -32,7 +32,7 @@ resource "docker_container" "mi_contenedor" {
         }
     }
     dynamic "volumes" {
-        for_each = var.volumes
+        for_each = var.volumes == null ? [] : var.volumes
         iterator = volumen
         content {
             host_path      = volumen.value["host_path"]

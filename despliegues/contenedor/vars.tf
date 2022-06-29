@@ -126,7 +126,7 @@ variable "volumes" {
     }))
     description = "Volumenes locales a montar en el contenedor"
     validation  {
-        condition = alltrue([ for volumen in var.volumes: 
+        condition = var.volumes ==null ? true : alltrue([ for volumen in var.volumes: 
             length(regexall("^[/]?([A-Za-z0-9_.-]+[/]?)*$"
                         , volumen.host_path != null ? 
                             volumen.host_path : 
@@ -136,7 +136,7 @@ variable "volumes" {
         error_message = "La ruta del host para el volumen no es válida"
     }
     validation  {
-        condition = alltrue([ for volumen in var.volumes: 
+        condition = var.volumes ==null ? true : alltrue([ for volumen in var.volumes: 
             length(regexall("^[/]?([A-Za-z0-9_.-]+[/]?)*$"
                         , volumen.container_path != null ? 
                             volumen.container_path : 
